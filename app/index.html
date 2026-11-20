@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Sunset Studio — GTA-style cover art maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">VS</span>
+    <span class="brand-name">Vice Sunset Studio</span>
+    <span class="brand-tag">cover art maker</span>
+  </div>
+  <div class="top-actions">
+    <button id="loadSampleBoulevard" type="button">Try boulevard photo</button>
+    <button id="loadSamplePier" type="button">Try pier photo</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <section class="panel controls" aria-label="Cover controls">
+    <h2>1 · Photos</h2>
+    <p class="hint">Photos stay on your machine — nothing is uploaded.</p>
+    <div class="photo-slots">
+      <label class="slot" data-slot="0">
+        <span>Photo A</span>
+        <input id="fileA" type="file" accept="image/*">
+      </label>
+      <label class="slot" data-slot="1">
+        <span>Photo B</span>
+        <input id="fileB" type="file" accept="image/*">
+      </label>
+      <label class="slot" data-slot="2">
+        <span>Photo C</span>
+        <input id="fileC" type="file" accept="image/*">
+      </label>
+    </div>
+    <p class="hint">Tip: one photo can fill every panel, or use a different photo per panel.</p>
+
+    <h2>2 · Layout</h2>
+    <div class="layout-row" role="group" aria-label="Panel layout">
+      <button type="button" data-layout="single">Single</button>
+      <button type="button" data-layout="duo">Duo</button>
+      <button type="button" data-layout="triptych">Triptych</button>
+      <button type="button" data-layout="grid">Grid 2×2</button>
+    </div>
+    <p class="hint">Click a panel in the preview to select it, drag to move the photo, scroll to zoom.</p>
+
+    <h2>3 · Selected panel</h2>
+    <div class="field">
+      <label for="panelPhoto">Photo in this panel</label>
+      <select id="panelPhoto">
+        <option value="0">Photo A</option>
+        <option value="1">Photo B</option>
+        <option value="2">Photo C</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="panelGrade">Colour grade</label>
+      <select id="panelGrade">
+        <option value="sunset">Sunset — warm orange &amp; pink</option>
+        <option value="neon">Neon — magenta &amp; cyan</option>
+        <option value="vice">Vice — purple dusk</option>
+        <option value="noir">Noir — black &amp; white</option>
+        <option value="original">Original — no grade</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="zoomRange">Zoom <output id="zoomOut">100%</output></label>
+      <input id="zoomRange" type="range" min="100" max="300" value="100">
+    </div>
+    <div class="field">
+      <label for="panXRange">Move left / right</label>
+      <input id="panXRange" type="range" min="-50" max="50" value="0">
+    </div>
+    <div class="field">
+      <label for="panYRange">Move up / down</label>
+      <input id="panYRange" type="range" min="-50" max="50" value="0">
+    </div>
+
+    <h2>4 · Caption</h2>
+    <div class="field">
+      <label for="captionInput">Main caption</label>
+      <input id="captionInput" type="text" maxlength="28" value="Sunset Heist">
+    </div>
+    <div class="field">
+      <label for="subInput">Small line under it</label>
+      <input id="subInput" type="text" maxlength="48" value="VICE CITY · SUMMER 2026">
+    </div>
+    <div class="field">
+      <label for="captionPlace">Caption position</label>
+      <select id="captionPlace">
+        <option value="bottom">Bottom</option>
+        <option value="top">Top</option>
+      </select>
+    </div>
+
+    <h2>5 · Export</h2>
+    <div class="field">
+      <label for="exportSize">Post size</label>
+      <select id="exportSize">
+        <option value="1920x1080">1920 × 1080 — wide</option>
+        <option value="1080x1080">1080 × 1080 — square</option>
+        <option value="1080x1350">1080 × 1350 — portrait</option>
+      </select>
+    </div>
+    <button id="exportBtn" type="button" class="export">Export PNG</button>
+    <p class="hint" id="exportNote">Ready.</p>
+  </section>
+
+  <section class="panel preview-wrap" aria-label="Live preview">
+    <div class="preview-head">
+      <h2>Live preview</h2>
+      <span id="sizeLabel">1920 × 1080</span>
+    </div>
+    <canvas id="preview" width="960" height="540"></canvas>
+    <p class="hint">The preview is the cover itself — what you see is what the PNG gets.</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>Original artwork made in your browser. No Rockstar Games logos, artwork or fonts — the lettering is drawn with system fonts and canvas gradients.</p>
+</footer>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
